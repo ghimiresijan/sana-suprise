@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Sana ❤️</title>
+<style>
+/* Reset */
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { height:100vh; overflow:hidden; font-family:'Segoe UI', sans-serif; }
+
+/* Animated Background */
+body {
+  display:flex; justify-content:center; align-items:center;
+  background:linear-gradient(-45deg, #ff9a9e, #fecfef, #ff9a9e, #fecfef);
+  background-size:400% 400%;
+  animation: gradientShift 15s ease infinite;
+  position:relative;
+}
+
+@keyframes gradientShift {0%,100%{background-position:0% 50%;}50%{background-position:100% 50%;}}
+
+/* Card */
+.card {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(15px);
+  width:90%; max-width:400px;
+  height:85vh;
+  border-radius:25px;
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  text-align:center;
+  box-shadow:0 15px 35px rgba(0,0,0,0.25);
+  overflow:hidden;
+  position:relative;
+  animation: cardFloat 6s ease-in-out infinite;
+  transition: all 0.8s ease;
+}
+@keyframes cardFloat {0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+
+/* Header */
+h1 {
+  font-size:clamp(1.5rem,5vw,2rem);
+  font-weight:700;
+  background: linear-gradient(45deg,#ff4d6d,#ff8fab);
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  margin-bottom:15px;
+  text-shadow:0 2px 10px rgba(255,77,109,0.3);
+}
+
+/* Text container scrollable */
+.text-container {
+  flex:1;
+  overflow-y:auto;
+  padding:10px 0;
+  position:relative;
+  scroll-behavior:smooth;
+}
+.text-container::before,
+.text-container::after {
+  content:""; position:absolute; left:0; right:0; height:20px; pointer-events:none;
+}
+.text-container::before { top:0; background:linear-gradient(to bottom, rgba(255,255,255,0.95), transparent);}
+.text-container::after { bottom:0; background:linear-gradient(to top, rgba(255,255,255,0.95), transparent);}
+.text { font-size:clamp(14px,2.5vw,16px); line-height:1.6; color:#444; text-align:center; }
+
+/* Buttons */
+.buttons { display:flex; justify-content:center; gap:15px; margin-top:10px; }
+button { padding:15px 30px; border-radius:50px; border:none; cursor:pointer; font-weight:600; position:relative; overflow:hidden; min-width:120px; transition:all 0.3s ease; }
+button::before { content:""; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,0.4),transparent); transition:left 0.5s; }
+button:hover::before { left:100%; }
+
+.yes {
+  background:linear-gradient(45deg,#ff4d6d,#ff8fab,#ff4d6d);
+  color:white;
+  box-shadow:0 8px 25px rgba(255,77,109,0.4);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse {0%,100%{transform:scale(1);}50%{transform:scale(1.05);}}
+
+.no {
+  background:rgba(255,255,255,0.9);
+  color:#ff4d6d;
+  backdrop-filter:blur(10px);
+  border:2px solid transparent;
+}
+.no:hover { transform:translateY(-3px) scale(1.02); border-color:#ff4d6d; box-shadow:0 10px 30px rgba(255,77,109,0.2); }
+
+/* Result */
+#result { display:none; flex-direction:column; justify-content:center; align-items:center; overflow:hidden; padding:20px; transition:all 0.8s ease; }
+#result.show { display:flex; animation:epicReveal 1.5s ease forwards; }
+@keyframes epicReveal {0%{opacity:0;transform:scale(0.3);}100%{opacity:1;transform:scale(1);}}
+#result h2 { font-size:clamp(1.8rem,8vw,2.5rem); background:linear-gradient(45deg,#ff4d6d,#ff8fab); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:20px; }
+#result p { font-size:clamp(14px,3vw,1.1rem); margin-bottom:12px; opacity:0; animation:fadeInUp 0.8s ease forwards; }
+#result p:nth-child(2){animation-delay:0.2s;} p:nth-child(3){animation-delay:0.4s;} p:nth-child(4){animation-delay:0.6s;} p:nth-child(5){animation-delay:0.8s;}
+@keyframes fadeInUp {0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);}}
+
+/* Hearts and Sparkles */
+.heart, .sparkle { position:fixed; z-index:5; pointer-events:none; }
+.heart { font-size:clamp(16px,3vw,24px); animation:floatUp linear infinite; filter:drop-shadow(0 0 8px rgba(255,255,255,0.8)); }
+@keyframes floatUp {0%{transform:translateY(100vh) scale(0.3) rotate(0deg);opacity:0}10%{opacity:1}90%{opacity:1}100%{transform:translateY(-30vh) scale(1.5) rotate(720deg);opacity:0}}
+.sparkle { width:6px;height:6px;border-radius:50%;background:radial-gradient(circle,#fff 0%,#ffd700 50%,transparent 70%); animation:sparkleAnim 3s linear infinite;}
+@keyframes sparkleAnim {0%{transform:scale(0) rotate(0deg);opacity:0}50%{opacity:1;transform:scale(1.2) rotate(180deg)}100%{transform:scale(0) rotate(360deg);opacity:0}}
+
+/* Explosion */
+.explosion { position:fixed; font-size:clamp(20px,4vw,30px); z-index:100; filter:drop-shadow(0 0 12px currentColor); }
+@keyframes explode {0%{transform:scale(0) rotate(0deg);opacity:1}50%{opacity:1}100%{transform:scale(0) translate(var(--x),var(--y)) rotate(720deg);opacity:0}}
+
+/* Responsive */
+@media(max-width:480px){.buttons{flex-direction:column;gap:10px}button{width:100%;max-width:250px}}
+</style>
+</head>
+<body>
+
+<div class="card" id="card">
+  <h1 id="header">Hey Sana ❤️</h1>
+  <div class="text-container" id="textContainer">
+    <div class="text">
+      Sana…<br><br>
+      I don’t know the perfect way to say this…<br>
+      but I want to be completely <strong>honest</strong> with you.<br><br>
+      Lately, you’ve been on my mind <em>a lot</em>…<br>
+      and somehow, it makes everything feel <strong>brighter</strong>.<br><br>
+      You make me feel safe, happy, and excited all at once.<br>
+      I love your messages, your laugh, your smile…<br><br>
+      I don’t want anything fake…<br>
+      I just want something <strong>real</strong>… with you.<br><br>
+      I dream about small moments: watching movies, talking for hours, just being us.<br><br>
+      <strong style="font-size:1.4rem; color:#ff4d6d;">Sanu… will you be mine? 💖</strong>
+    </div>
+  </div>
+  <div class="buttons" id="buttons">
+    <button class="yes" onclick="yesClick()">Yes 💖</button>
+    <button class="no" id="noBtn">No 😢</button>
+  </div>
+</div>
+
+<div id="result">
+  <h2>💖 YESSSSS! 💖</h2>
+  <p>You just made me the <strong>happiest person alive</strong> 🥺💖</p>
+  <p>I promise to always care for you and make you smile 💕</p>
+  <p>I dream about our laughter, hugs, and adventures together 💖</p>
+  <p>I'll be honest and supportive, always by your side 🥰</p>
+  <p><strong>Sanu & Sana Forever 💖✨</strong></p>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.querySelector(".yes");
+let noCount=0, scale=1;
+const noMessages=["Are you sure? 💔","Think again 💕","One more chance? 🥺","I know you want YES! 😍","Just click YES! 💖"];
+
+// Hearts & Sparkles
+function createHeart(){const h=document.createElement("div");h.className="heart";h.innerHTML=["💖","💕","💗","💝","✨"][Math.floor(Math.random()*5)];h.style.left=Math.random()*100+"vw";h.style.animationDuration=(6+Math.random()*8)+"s";document.body.appendChild(h);setTimeout(()=>h.remove(),15000);}
+function createSparkle(){const s=document.createElement("div");s.className="sparkle";s.style.left=Math.random()*100+"vw";s.style.top=Math.random()*100+"vh";document.body.appendChild(s);setTimeout(()=>s.remove(),3000);}
+setInterval(()=>{ if(Math.random()>0.6) createHeart(); },1500);
+setInterval(()=>{ if(Math.random()>0.7) createSparkle(); },800);
+
+// NO button dodge
+noBtn.addEventListener("mouseover",()=>{
+  let x=(Math.random()-0.5)*120;let y=(Math.random()-0.5)*60;
+  noBtn.style.transform=`translate(${x}px,${y}px) scale(0.95)`; noBtn.style.transition="transform 0.3s ease";
+});
+noBtn.addEventListener("mouseout",()=>{noBtn.style.transform="";});
+noBtn.addEventListener("click",()=>{
+  noCount++; scale+=0.12; yesBtn.style.transform=`scale(${scale})`;
+  if(noCount<=noMessages.length) noBtn.textContent=noMessages[noCount-1];
+  if(noCount>=5){alert("Sana… I KNOW you want YES! 💖"); noBtn.textContent="No 😢"; noCount=0;}
+});
+
+// YES click
+function yesClick(){
+  // Remove card
+  document.getElementById("card").style.display="none";
+  // Show result
+  let r=document.getElementById("result"); r.classList.add("show");
+  explodeHearts(); createFireworks();
+  setTimeout(()=>{for(let i=0;i<8;i++){setTimeout(()=>explodeHearts(),i*600);}},2000);
+}
+
+function explodeHearts(){for(let i=0;i<40;i++){const h=document.createElement("div");h.className="explosion";h.innerHTML=["💖","💕","✨","⭐"][Math.floor(Math.random()*4)];h.style.left=window.innerWidth/2+"px";h.style.top=window.innerHeight/2+"px";h.style.setProperty("--x",(Math.random()-0.5)*500+"px");h.style.setProperty("--y",(Math.random()-0.5)*500+"px");h.style.animation="explode 1s forwards";document.body.appendChild(h);setTimeout(()=>h.remove(),1000);}}
+function createFireworks(){for(let i=0;i<30;i++){setTimeout(()=>explodeHearts(),i*200);}}
+</script>
+</body>
+</html>
